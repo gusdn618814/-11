@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Polylist.h"
+#include "polyList.h"
 
 // -----------------------------------------------
 // 순차 리스트 생성
 // -----------------------------------------------
-Polylist* createPolylist(int size) {
-    Polylist* pl = (Polylist*)malloc(sizeof(Polylist));
-    pl->data = (elementPolylist*)malloc(sizeof(elementPolylist) * size);
+polyList* createPolyList(int size) {
+    polyList* pl = (polyList*)malloc(sizeof(polyList));
+    pl->data = (elementPolyList*)malloc(sizeof(elementPolyList) * size);
     pl->size = 0;
     pl->capacity = size;
     return pl;
@@ -16,7 +16,7 @@ Polylist* createPolylist(int size) {
 // -----------------------------------------------
 // 순차 리스트 메모리 해제
 // -----------------------------------------------
-void destroyPolylist(Polylist* pl) {
+void destroyPolyList(polyList* pl) {
     free(pl->data);
     free(pl);
 }
@@ -24,21 +24,21 @@ void destroyPolylist(Polylist* pl) {
 // -----------------------------------------------
 // 비어있는지 확인
 // -----------------------------------------------
-int isEmptyPolylist(Polylist* pl) {
+int isEmptyPolyList(polyList* pl) {
     return (pl->size == 0) ? 1 : 0;
 }
 
 // -----------------------------------------------
 // 꽉 찼는지 확인
 // -----------------------------------------------
-int isFullPolylist(Polylist* pl) {
+int isFullPolyList(polyList* pl) {
     return (pl->size == pl->capacity) ? 1 : 0;
 }
 
 // -----------------------------------------------
 // 현재 크기 반환
 // -----------------------------------------------
-int sizePolylist(Polylist* pl) {
+int sizePolyList(polyList* pl) {
     return pl->size;
 }
 
@@ -48,7 +48,7 @@ int sizePolylist(Polylist* pl) {
 // 루프를 al->size부터 시작하면 al->data[size+1] 범위 초과
 // → i = pl->size - 1 부터 시작하도록 수정
 // -----------------------------------------------
-int insertPolylist(Polylist* pl, int pos, elementPolylist item) {
+int insertPolyList(polyList* pl, int pos, elementPolyList item) {
     if (pos < 0 || pos > pl->size) {
         return 0;
     }
@@ -64,8 +64,8 @@ int insertPolylist(Polylist* pl, int pos, elementPolylist item) {
 // -----------------------------------------------
 // 삭제
 // -----------------------------------------------
-elementPolylist deletePolylist(Polylist* pl, int pos) {
-    elementPolylist item = pl->data[pos];
+elementPolyList deletePolyList(polyList* pl, int pos) {
+    elementPolyList item = pl->data[pos];
     for (int i = pos; i < pl->size - 1; i++) {
         pl->data[i] = pl->data[i + 1];
     }
@@ -76,14 +76,14 @@ elementPolylist deletePolylist(Polylist* pl, int pos) {
 // -----------------------------------------------
 // 특정 위치 항목 반환
 // -----------------------------------------------
-elementPolylist getItemPolylist(Polylist* pl, int pos) {
+elementPolyList getItemPolyList(polyList* pl, int pos) {
     return pl->data[pos];
 }
 
 // -----------------------------------------------
 // 특정 위치 항목 교체
 // -----------------------------------------------
-int replaceItemPolylist(Polylist* pl, int pos, elementPolylist item) {
+int replaceItemPolyList(polyList* pl, int pos, elementPolyList item) {
     if (pos < 0 || pos > pl->size - 1) {
         return 0;
     }
@@ -94,7 +94,7 @@ int replaceItemPolylist(Polylist* pl, int pos, elementPolylist item) {
 // -----------------------------------------------
 // 출력
 // -----------------------------------------------
-void printPolylist(Polylist* pl) {
+void printPolyList(polyList* pl) {
     printf("Poly List: ");
     for (int i = 0; i < pl->size; i++) {
         if (i > 0) printf(" + ");
